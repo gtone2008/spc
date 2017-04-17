@@ -1,0 +1,10 @@
+C:\Users\zhouz13\Desktop\SPI_PCC\SPI_PCC.DALTests\bin\Debug\SPI_PCC.DALTests.dll
+C:\Users\zhouz13\Desktop\SPI_PCC\SPI_PCC.DALTests\bin\Debug\SPI_PCC.DALTests.pdb
+C:\Users\zhouz13\Desktop\SPI_PCC\SPI_PCC.DALTests\bin\Debug\SPI_PCC.DAL.dll
+C:\Users\zhouz13\Desktop\SPI_PCC\SPI_PCC.DALTests\bin\Debug\SPI_PCC.Model.dll
+C:\Users\zhouz13\Desktop\SPI_PCC\SPI_PCC.DALTests\bin\Debug\MySql.Data.dll
+C:\Users\zhouz13\Desktop\SPI_PCC\SPI_PCC.DALTests\bin\Debug\SPI_PCC.DAL.pdb
+C:\Users\zhouz13\Desktop\SPI_PCC\SPI_PCC.DALTests\bin\Debug\SPI_PCC.Model.pdb
+C:\Users\zhouz13\Desktop\SPI_PCC\SPI_PCC.DALTests\obj\Debug\SPI_PCC.DALTests.csprojResolveAssemblyReference.cache
+C:\Users\zhouz13\Desktop\SPI_PCC\SPI_PCC.DALTests\obj\Debug\SPI_PCC.DALTests.dll
+C:\Users\zhouz13\Desktop\SPI_PCC\SPI_PCC.DALTests\obj\Debug\SPI_PCC.DALTests.pdb

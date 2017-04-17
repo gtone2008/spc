@@ -1,0 +1,660 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>PCC – SPC Dashboard</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="refresh" content="180">
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="Scripts/echarts.common.min.js"></script>
+    <script src="Scripts/jquery-1.9.1.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+    <style>
+        .left{
+            padding:0px;
+            border:1px solid white;
+            margin: 0px -1px -2px 0px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row form-inline">
+            <label class="col-lg-4 col-lg-offset-4  text-center" style="font-size:20px">Statistical Process Control</label>
+            <h6 class="col-lg-4 text-right bottom bottom-right">Measurement: Solder Paste Height(Unit: Mil)</h6>
+        </div>
+        
+       <div class="left col-lg-6" >
+                <div id="bay1x" class="col-lg-12" style="height:100px; "></div>
+                <div id="bay1r" class="col-lg-12" style="height:100px;"></div>
+            </div>
+        <div class="left col-lg-6">
+            <div id="bay2x" class="col-lg-12" style="height:100px;"></div>
+            <div id="bay2r" class="col-lg-12" style="height:100px;"></div>
+        </div>
+        <div class="left col-lg-6" >
+            <div id="bay3x" class="col-lg-12" style="height:100px; "></div>
+            <div id="bay3r" class="col-lg-12" style="height:100px;"></div>
+        </div>
+        <div class="left col-lg-6" style="display:none">
+            <div id="bay4x" class="col-lg-12" style="height:100px; "></div>
+            <div id="bay4r" class="col-lg-12" style="height:100px;"></div>
+        </div>
+        <div class="left col-lg-6" style="display:none">
+            <div id="bay5x" class="col-lg-12" style="height:100px; "></div>
+            <div id="bay5r" class="col-lg-12" style="height:100px;"></div>
+        </div>
+        <div class="left col-lg-6" style="display:none">
+            <div id="bay6x" class="col-lg-12" style="height:100px; "></div>
+            <div id="bay6r" class="col-lg-12" style="height:100px;"></div>
+        </div>
+        <div class="left col-lg-6" style="display:none">
+            <div id="bay7x" class="col-lg-12" style="height:100px;"></div>
+            <div id="bay7r" class="col-lg-12" style="height:100px;"></div>
+        </div>
+        <div class="left col-lg-6" >
+            <div id="bay8x" class="col-lg-12" style="height:100px; "></div>
+            <div id="bay8r" class="col-lg-12" style="height:100px;"></div>
+        </div>
+        <div class="left col-lg-6" >
+            <div id="bay9x" class="col-lg-12" style="height:100px;"></div>
+            <div id="bay9r" class="col-lg-12" style="height:100px;"></div>
+        </div>
+        <div class="left col-lg-6" >
+            <div id="bay10x" class="col-lg-12" style="height:100px;"></div>
+            <div id="bay10r" class="col-lg-12" style="height:100px;"></div>
+        </div>
+        <div class="left col-lg-6" >
+            <div id="bay11x" class="col-lg-12" style="height:100px;"></div>
+            <div id="bay11r" class="col-lg-12" style="height:100px;"></div>
+        </div>
+        <div class="left col-lg-6" >
+            <div id="bay12x" class="col-lg-12" style="height:100px; "></div>
+            <div id="bay12r" class="col-lg-12" style="height:100px;"></div>
+        </div>
+            
+    
+    </div>
+    <script>
+	//if ($.browser.msie) {alert('Please use Chrome get the best experience!')}
+        var ht = (document.body.scrollHeight) / 9;
+        $(".col-lg-12").css('height', ht);
+        function aa() {
+            if ($('#dd2').css('display') == 'none') {
+                $('#dd2').show();
+                $('#dd1').hide();
+            }
+            else {
+                $('#dd2').hide();
+                $('#dd1').show();
+            }
+
+        }
+
+        //setInterval('aa()', 6000);
+
+        var myChart1x = echarts.init(document.getElementById('bay1x'));
+        var myChart2x = echarts.init(document.getElementById('bay2x'));
+        var myChart1r = echarts.init(document.getElementById('bay1r'));
+        var myChart2r = echarts.init(document.getElementById('bay2r'));
+        var myChart3x = echarts.init(document.getElementById('bay3x'));
+        var myChart4x = echarts.init(document.getElementById('bay4x'));
+        var myChart3r = echarts.init(document.getElementById('bay3r'));
+        var myChart4r = echarts.init(document.getElementById('bay4r'));
+        var myChart5x = echarts.init(document.getElementById('bay5x'));
+        var myChart6x = echarts.init(document.getElementById('bay6x'));
+        var myChart5r = echarts.init(document.getElementById('bay5r'));
+        var myChart6r = echarts.init(document.getElementById('bay6r'));
+
+        var myChart7x = echarts.init(document.getElementById('bay7x'));
+        var myChart8x = echarts.init(document.getElementById('bay8x'));
+        var myChart7r = echarts.init(document.getElementById('bay7r'));
+        var myChart8r = echarts.init(document.getElementById('bay8r'));
+        var myChart9x = echarts.init(document.getElementById('bay9x'));
+        var myChart10x = echarts.init(document.getElementById('bay10x'));
+        var myChart9r = echarts.init(document.getElementById('bay9r'));
+        var myChart10r = echarts.init(document.getElementById('bay10r'));
+        var myChart11x = echarts.init(document.getElementById('bay11x'));
+        var myChart12x = echarts.init(document.getElementById('bay12x'));
+        var myChart11r = echarts.init(document.getElementById('bay11r'));
+        var myChart12r = echarts.init(document.getElementById('bay12r'));
+
+        var MarkLineItem;
+
+        option1 = {
+            tooltip: {},
+            backgroundColor: '#f2f2f2',
+            //title: { 'show': 'true', text: '', textStyle: { fontStyle: 'italic', fontWeight: 'bold', fontSize: '10' }, },
+            grid: { x: 30, y: 20, x2: 70, y2: 10, show: true,  },
+            legend: { show: true, textStyle: { fontStyle: 'normal', fontWeight: 'normal', fontSize: '12' }, data: [{ name: 'SPC', icon: 'none', }], formatter: '' },
+            xAxis: {
+                data: [],
+                boundaryGap: false,
+            },
+            yAxis: {
+                type: 'value',
+                splitLine: { show: false }, 
+                nameRotate: 90,
+                nameLocation: 'middle',
+                axisLabel: { show: false, },
+                axisTick: { show: false, },
+            },
+            series: [
+                {
+                    name: 'SPC',
+                    type: 'line',
+                    symbol: 'circle',
+                    symbolSize: 5,
+                    showAllSymbol: true,
+                    itemStyle: { normal: { color: '#00b050' } },
+                    lineStyle: { normal: { color: 'silver', width: 1, } },
+                    data: [],
+                    markLine: {
+                        symbol: false,
+                        label: { normal: { position: 'end', formatter: '{b}: {c}', } },
+                        data: [],
+                    },
+                },
+
+            ]
+        };
+
+
+        $.ajax({
+            url: "AJAX/GetDataHandler.ashx",
+            type: "post",
+            dataType: "json",
+			cache:false,
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+
+                var data1x = [], test1x = [], bb1x = [];
+                var data2x = [], test2x = [], bb2x = [];
+                var data3x = [], test3x = [], bb3x = [];
+                var data4x = [], test4x = [], bb4x = [];
+                var data5x = [], test5x = [], bb5x = [];
+                var data6x = [], test6x = [], bb6x = [];
+                var data7x = [], test7x = [], bb7x = [];
+                var data8x = [], test8x = [], bb8x = [];
+                var data9x = [], test9x = [], bb9x = [];
+                var data10x = [], test10x = [], bb10x = [];
+                var data11x = [], test11x = [], bb11x = [];
+                var data12x = [], test12x = [], bb12x = [];
+
+                var data1r = [], test1r = [], bb1r = [];
+                var data2r = [], test2r = [], bb2r = [];
+                var data3r = [], test3r = [], bb3r = [];
+                var data4r = [], test4r = [], bb4r = [];
+                var data5r = [], test5r = [], bb5r = [];
+                var data6r = [], test6r = [], bb6r = [];
+                var data7r = [], test7r = [], bb7r = [];
+                var data8r = [], test8r = [], bb8r = [];
+                var data9r = [], test9r = [], bb9r = [];
+                var data10r = [], test10r = [], bb10r = [];
+                var data11r = [], test11r = [], bb11r = [];
+                var data12r = [], test12r = [], bb12r = [];
+
+
+                for (var i = 0; i < data.length; i++) {
+                    switch(data[i]['Line'])
+                    {
+                        case 'Bay2-1':
+                            data1x.push(data[i]['X']);
+                            test1x.push(data[i]['XFlag']);
+                            bb1x[0] = data[i]['USL_X'];
+                            bb1x[1] = data[i]['UCL_X'];
+                            bb1x[2] = data[i]['CL_X'];
+                            bb1x[3] = data[i]['LCL_X'];
+                            bb1x[4] = data[i]['LSL_X'];
+                            bb1x[5] = data[i]['Line'];
+                            bb1x[6] = data[i]['Customer'];
+                            bb1x[7] = data[i]['ModelName'];
+                            data1r.push(data[i]['R']);
+                            test1r.push(data[i]['RFlag']);
+                            bb1r[0] = data[i]['UCL_R'];
+                            bb1r[1] = data[i]['CL_R']; break;
+                        case 'Bay3-1':
+                            data2x.push(data[i]['X']);
+                            test2x.push(data[i]['XFlag']);
+                            bb2x[0] = data[i]['USL_X'];
+                            bb2x[1] = data[i]['UCL_X'];
+                            bb2x[2] = data[i]['CL_X'];
+                            bb2x[3] = data[i]['LCL_X'];
+                            bb2x[4] = data[i]['LSL_X'];
+                            bb2x[5] = data[i]['Line'];
+                            bb2x[6] = data[i]['Customer'];
+                            bb2x[7] = data[i]['ModelName'];
+                            data2r.push(data[i]['R']);
+                            test2r.push(data[i]['RFlag']);
+                            bb2r[0] = data[i]['UCL_R'];
+                            bb2r[1] = data[i]['CL_R']; break;
+                        case 'Bay3-2':
+                            data3x.push(data[i]['X']);
+                            test3x.push(data[i]['XFlag']);
+                            bb3x[0] = data[i]['USL_X'];
+                            bb3x[1] = data[i]['UCL_X'];
+                            bb3x[2] = data[i]['CL_X'];
+                            bb3x[3] = data[i]['LCL_X'];
+                            bb3x[4] = data[i]['LSL_X'];
+                            bb3x[5] = data[i]['Line'];
+                            bb3x[6] = data[i]['Customer'];
+                            bb3x[7] = data[i]['ModelName'];
+                            data3r.push(data[i]['R']);
+                            test3r.push(data[i]['RFlag']);
+                            bb3r[0] = data[i]['UCL_R'];
+                            bb3r[1] = data[i]['CL_R']; break;
+                        case 'Bay5-1':
+                            data4x.push(data[i]['X']);
+                            test4x.push(data[i]['XFlag']);
+                            bb4x[0] = data[i]['USL_X'];
+                            bb4x[1] = data[i]['UCL_X'];
+                            bb4x[2] = data[i]['CL_X'];
+                            bb4x[3] = data[i]['LCL_X'];
+                            bb4x[4] = data[i]['LSL_X'];
+                            bb4x[5] = data[i]['Line'];
+                            bb4x[6] = data[i]['Customer'];
+                            bb4x[7] = data[i]['ModelName'];
+                            data4r.push(data[i]['R']);
+                            test4r.push(data[i]['RFlag']);
+                            bb4r[0] = data[i]['UCL_R'];
+                            bb4r[1] = data[i]['CL_R']; break;
+                        case 'Bay5-2':
+                            data5x.push(data[i]['X']);
+                            test5x.push(data[i]['XFlag']);
+                            bb5x[0] = data[i]['USL_X'];
+                            bb5x[1] = data[i]['UCL_X'];
+                            bb5x[2] = data[i]['CL_X'];
+                            bb5x[3] = data[i]['LCL_X'];
+                            bb5x[4] = data[i]['LSL_X'];
+                            bb5x[5] = data[i]['Line'];
+                            bb5x[6] = data[i]['Customer'];
+                            bb5x[7] = data[i]['ModelName'];
+                            data5r.push(data[i]['R']);
+                            test5r.push(data[i]['RFlag']);
+                            bb5r[0] = data[i]['UCL_R'];
+                            bb5r[1] = data[i]['CL_R']; break;
+                        case 'Bay6-1':
+                            data6x.push(data[i]['X']);
+                            test6x.push(data[i]['XFlag']);
+                            bb6x[0] = data[i]['USL_X'];
+                            bb6x[1] = data[i]['UCL_X'];
+                            bb6x[2] = data[i]['CL_X'];
+                            bb6x[3] = data[i]['LCL_X'];
+                            bb6x[4] = data[i]['LSL_X'];
+                            bb6x[5] = data[i]['Line'];
+                            bb6x[6] = data[i]['Customer'];
+                            bb6x[7] = data[i]['ModelName'];
+                            data6r.push(data[i]['R']);
+                            test6r.push(data[i]['RFlag']);
+                            bb6r[0] = data[i]['UCL_R'];
+                            bb6r[1] = data[i]['CL_R']; break;
+                        case 'Bay6-2':
+                            data7x.push(data[i]['X']);
+                            test7x.push(data[i]['XFlag']);
+                            bb7x[0] = data[i]['USL_X'];
+                            bb7x[1] = data[i]['UCL_X'];
+                            bb7x[2] = data[i]['CL_X'];
+                            bb7x[3] = data[i]['LCL_X'];
+                            bb7x[4] = data[i]['LSL_X'];
+                            bb7x[5] = data[i]['Line'];
+                            bb7x[6] = data[i]['Customer'];
+                            bb7x[7] = data[i]['ModelName'];
+                            data7r.push(data[i]['R']);
+                            test7r.push(data[i]['RFlag']);
+                            bb7r[0] = data[i]['UCL_R'];
+                            bb7r[1] = data[i]['CL_R']; break;
+                        case 'Bay6A':
+                            data8x.push(data[i]['X']);
+                            test8x.push(data[i]['XFlag']);
+                            bb8x[0] = data[i]['USL_X'];
+                            bb8x[1] = data[i]['UCL_X'];
+                            bb8x[2] = data[i]['CL_X'];
+                            bb8x[3] = data[i]['LCL_X'];
+                            bb8x[4] = data[i]['LSL_X'];
+                            bb8x[5] = data[i]['Line'];
+                            bb8x[6] = data[i]['Customer'];
+                            bb8x[7] = data[i]['ModelName'];
+                            data8r.push(data[i]['R']);
+                            test8r.push(data[i]['RFlag']);
+                            bb8r[0] = data[i]['UCL_R'];
+                            bb8r[1] = data[i]['CL_R']; break;
+                        case 'Bay8a-1':
+                            data9x.push(data[i]['X']);
+                            test9x.push(data[i]['XFlag']);
+                            bb9x[0] = data[i]['USL_X'];
+                            bb9x[1] = data[i]['UCL_X'];
+                            bb9x[2] = data[i]['CL_X'];
+                            bb9x[3] = data[i]['LCL_X'];
+                            bb9x[4] = data[i]['LSL_X'];
+                            bb9x[5] = 'Bay8A-1';
+                            bb9x[6] = data[i]['Customer'];
+                            bb9x[7] = data[i]['ModelName'];
+                            data9r.push(data[i]['R']);
+                            test9r.push(data[i]['RFlag']);
+                            bb9r[0] = data[i]['UCL_R'];
+                            bb9r[1] = data[i]['CL_R']; break;
+                        case 'Bay8a-2':
+                            data10x.push(data[i]['X']);
+                            test10x.push(data[i]['XFlag']);
+                            bb10x[0] = data[i]['USL_X'];
+                            bb10x[1] = data[i]['UCL_X'];
+                            bb10x[2] = data[i]['CL_X'];
+                            bb10x[3] = data[i]['LCL_X'];
+                            bb10x[4] = data[i]['LSL_X'];
+                            bb10x[5] = 'Bay8A-2';
+                            bb10x[6] = data[i]['Customer'];
+                            bb10x[7] = data[i]['ModelName'];
+                            data10r.push(data[i]['R']);
+                            test10r.push(data[i]['RFlag']);
+                            bb10r[0] = data[i]['UCL_R'];
+                            bb10r[1] = data[i]['CL_R']; break;
+                        case 'Bay9-1':
+                            data11x.push(data[i]['X']);
+                            test11x.push(data[i]['XFlag']);
+                            bb11x[0] = data[i]['USL_X'];
+                            bb11x[1] = data[i]['UCL_X'];
+                            bb11x[2] = data[i]['CL_X'];
+                            bb11x[3] = data[i]['LCL_X'];
+                            bb11x[4] = data[i]['LSL_X'];
+                            bb11x[5] = data[i]['Line'];
+                            bb11x[6] = data[i]['Customer'];
+                            bb11x[7] = data[i]['ModelName'];
+                            data11r.push(data[i]['R']);
+                            test11r.push(data[i]['RFlag']);
+                            bb11r[0] = data[i]['UCL_R'];
+                            bb11r[1] = data[i]['CL_R']; break;
+                        case 'Bay9-2':
+                            data12x.push(data[i]['X']);
+                            test12x.push(data[i]['XFlag']);
+                            bb12x[0] = data[i]['USL_X'];
+                            bb12x[1] = data[i]['UCL_X'];
+                            bb12x[2] = data[i]['CL_X'];
+                            bb12x[3] = data[i]['LCL_X'];
+                            bb12x[4] = data[i]['LSL_X'];
+                            bb12x[5] = data[i]['Line'];
+                            bb12x[6] = data[i]['Customer'];
+                            bb12x[7] = data[i]['ModelName'];
+                            data12r.push(data[i]['R']);
+                            test12r.push(data[i]['RFlag']);
+                            bb12r[0] = data[i]['UCL_R'];
+                            bb12r[1] = data[i]['CL_R']; break;
+                    };                 
+                };
+
+                //if (data1x[0] == 'undefined') { data1x = []; test1x = []; bb1x = [] };
+                if (data1x.length > 0) {
+                    bayx(data1x, test1x, bb1x, myChart1x);
+                    bayr(data1r, test1r, bb1r, myChart1r);
+                }
+                else
+                    $('#bay1x,#bay1r').css("display", "none");
+                    
+                if (data2x.length > 0)
+                {
+                    bayx(data2x, test2x, bb2x, myChart2x);
+                    bayr(data2r, test2r, bb2r, myChart2r);
+                }
+                else
+                    $('#bay2x,#bay2r').css("display", "none");
+                    
+                if (data3x.length > 0)
+                {
+                    bayx(data3x, test3x, bb3x, myChart3x);
+                    bayr(data3r, test3r, bb3r, myChart3r);                 
+                }
+                else
+                    $('#bay3x,#bay3r').css("display", "none");
+                //if (data4x.length > 0)//bay-1
+                //{
+                //    bayx(data4x, test4x, bb4x, myChart4x);
+                //    bayr(data4r, test4r, bb4r, myChart4r);
+                //}
+                //else
+                $('#bay4x,#bay4r').css("display", "none");
+                    
+                //    if (data5x.length > 0) {//bay-2
+                //    bayx(data5x, test5x, bb5x, myChart5x);
+                //    bayr(data5r, test5r, bb5r, myChart5r);
+                //}
+                //else
+                $('#bay5x,#bay5r').css("display", "none");
+                    
+                //if (data6x.length > 0)//bay6-1
+                //{
+                //    bayx(data6x, test6x, bb6x, myChart6x);
+                //    bayr(data6r, test6r, bb6r, myChart6r);
+                //}
+                //else
+                $('#bay6x,#bay6r').css("display", "none");
+                    
+                //if (data7x.length > 0)
+                //{
+                //    bayx(data7x, test7x, bb7x, myChart7x);
+                //    bayr(data7r, test7r, bb7r, myChart7r);
+                //}
+                //else
+                $('#bay7x,#bay7r').css("display", "none");
+                   
+                //if (data8x.length > 0)
+                //{
+                //    bayx(data8x, test8x, bb8x, myChart8x);
+                //    bayr(data8r, test8r, bb8r, myChart8r);
+                //}
+                //else
+                $('#bay8x,#bay8r').css("display", "none");
+                   
+                if (data9x.length > 0)
+                {
+                    bayx(data9x, test9x, bb9x, myChart9x);
+                    bayr(data9r, test9r, bb9r, myChart9r);
+                }
+                else
+                    $('#bay9x,#bay9r').css("display", "none");
+                    
+                if (data10x.length > 0)
+                {
+                    bayx(data10x, test10x, bb10x, myChart10x);
+                    bayr(data10r, test10r, bb10r, myChart10r);
+                }
+                else
+                    $('#bay10x,#bay10r').css("display", "none");
+                    
+                if (data11x.length > 0)
+                {
+                    bayx(data11x, test11x, bb11x, myChart11x);
+                    bayr(data11r, test11r, bb11r, myChart11r);
+                }
+                else
+                    $('#bay11x,#bay11r').css("display", "none");
+                    
+                if (data12x.length > 0)
+                {
+                    bayx(data12x, test12x, bb12x, myChart12x);
+                    bayr(data12r, test12r, bb12r, myChart12r);
+                }
+                else
+                    $('#bay12x,#bay12r').css("display", "none");
+                    
+            },
+            error: function (err) {
+                //alert(err);
+                document.write("No data  from database!\n");
+            }
+        });
+
+        function markLine1(USL, UCL, CL, LCL, LSL) {
+            MarkLineItem = [
+                 //{
+                 //    name: 'USL',
+                 //    yAxis: USL,
+                 //    lineStyle: {
+                 //        normal: {                           
+                 //            type: 'dotted',
+                 //            color: 'red'
+                 //        }
+                 //    }
+                 //},
+                 {
+                     name: 'UCL',
+                     yAxis: UCL,
+                     lineStyle: {
+                         normal: {
+                             type: 'solid',
+                             color: 'green'
+                         }
+                     }
+                 },
+                {
+                    name: 'CL',
+                    yAxis: CL,
+                    lineStyle: {
+                        normal: {
+                            type: 'solid',
+                            color: 'green'
+                        }
+                    }
+                },
+                 {
+                     name: 'LCL',
+                     yAxis: LCL,
+                     lineStyle: {
+                         normal: {
+                             type: 'solid',
+                             color: 'green'
+                         }
+                     }
+                 },
+                  //{
+                  //    name: 'LSL',
+                  //    yAxis: LSL,
+                  //    lineStyle: {
+                  //        normal: {
+                  //            type: 'dotted',
+                  //            color: 'red'
+                  //        }
+                  //    }
+                  //}
+
+            ];
+
+            return MarkLineItem;
+        };
+
+        function markLine2(UCL, CL, LCL) {
+            MarkLineItem = [
+                 {
+                     name: 'UCL',
+                     yAxis: UCL,
+                     lineStyle: {
+                         normal: {
+                             type: 'solid',
+                             color: 'green'
+                         }
+                     }
+                 },
+                {
+                    name: 'CL',
+                    yAxis: CL,
+                    lineStyle: {
+                        normal: {
+                            type: 'solid',
+                            color: 'green'
+                        }
+                    }
+                },
+                 {
+                     name: 'LCL',
+                     yAxis: LCL,
+                     lineStyle: {
+                         normal: {
+                             type: 'solid',
+                             color: 'green'
+                         }
+                     }
+                 },
+            ];
+
+            return MarkLineItem;
+        }
+        //markLine1(USL, UCL, CL, LCL, LSL)
+        function bayx(data, test, bb, myChart) {
+            MarkLineItem = markLine1(bb[0], bb[1], bb[2], bb[3], bb[4]);
+			//(LCL-cl)*1.1+cl
+			option1.yAxis.min =(parseFloat(bb[3])-parseFloat(bb[2]))*1.5+parseFloat(bb[2]);
+            //option1.yAxis.min = (0.36 * parseFloat(bb[2])).toString();
+			//(ucl-cl)*1.1+cl
+			option1.yAxis.max=(parseFloat(bb[1])-parseFloat(bb[2]))*1.5+parseFloat(bb[2]);
+            //option1.yAxis.max = (1.64 * parseFloat(bb[2])).toString();
+            //option1.title.text = "Xbar-Chart";
+            option1.yAxis.name = 'Xbar';
+            option1.grid.backgroundColor = "#ffffff",
+            option1.legend.show = true;
+            option1.legend.formatter = "Bay:  " + bb[5] + "    Workcell:  " + bb[6] + "    Model:  " + bb[7] + "    USL: " + bb[0] + "    LSL: " + bb[4];
+            option1.series[0].markLine.data = MarkLineItem;
+            option1.grid.y = 20;
+            option1.grid.y2 = 10;
+            //var data1 = [5.898, 6.111, 5.9052, 6.3306, 5.8798, 5.8568, 5.9052, 6.3306, 5.9052, 6.3306, 5.8798, 5.8568, 5.9052, 6.3306, 5.8798, 5.8568, 5.9052, 6.3306, 5.8798, 5.8568, 5.9052, 6.3306, 5.8798, 5.8568, 5.8798, 5.8568, 5.9052, 6.3306, 5.8798, 5.8568, 5.9052, 6.3306, 5.8798, 5.8568, 5.9052, 6.3306, 5.8798, 5.8568, 5.5, 6.23, 6.3306, 5.8798, 5.8568, 6.3306, 5.8798, 5.8568, 6.314, 6.292, 5.879, 5.9052, 6.3306];
+            //var test1 = [0, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 0];
+            option1.series[0].data = [];
+            for (var i = 0; i < test.length; i++) {
+                if (parseInt(test[i]) > 0) {
+                    rule = { value: data[i], itemStyle: { normal: { color: '#ff0000' } }, };
+                    data.splice(i, 1, rule);
+                }
+            };
+           
+            for (var i = 0; i < data.length; i++) {
+
+                option1.series[0].data.push(data[i]);
+            }
+
+            myChart.setOption(option1);
+        }
+        //markLine2(UCL, CL, LCL)
+        function bayr(data, test, bb, myChart) {
+
+            MarkLineItem = markLine2(bb[0], bb[1], 0);
+            option1.yAxis.min = (0).toString();
+            option1.yAxis.max = (1.15 * parseFloat(bb[0])).toString();
+            //option1.title.text = "R-Chart";
+            option1.grid.backgroundColor = "#cce6ff",
+            option1.yAxis.name = 'R';
+            option1.legend.show = false;
+            option1.series[0].markLine.data = MarkLineItem;
+            option1.grid.y = 5;
+            option1.grid.y2 = 20;
+            //var data1 = [5.898, 6.111, 5.9052, 6.3306, 5.8798, 5.8568, 5.9052, 6.3306, 5.9052, 6.3306, 5.8798, 5.8568, 5.9052, 6.3306, 5.8798, 5.8568, 5.9052, 6.3306, 5.8798, 5.8568, 5.9052, 6.3306, 5.8798, 5.8568, 5.8798, 5.8568, 5.9052, 6.3306, 5.8798, 5.8568, 5.9052, 6.3306, 5.8798, 5.8568, 5.9052, 6.3306, 5.8798, 5.8568, 5.5, 6.23, 6.3306, 5.8798, 5.8568, 6.3306, 5.8798, 5.8568, 6.314, 6.292, 5.879, 5.9052, 6.3306];
+            //var test1 = [0, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 0];
+            option1.series[0].data = [];
+
+            for (var i = 0; i < test.length; i++) {
+                if (parseInt(test[i]) > 0) {
+                    rule = { value: data[i], itemStyle: { normal: { color: '#ff0000' } }, };
+                    data.splice(i, 1, rule);
+                }
+            };
+            for (var i = 0; i < data.length; i++) {
+
+                option1.series[0].data.push(data[i]);
+            }
+            myChart.setOption(option1);
+        }
+
+        //var test2 = test1.find((n)=>n=='1');
+        //var test2 = test1.find(function (value,index,arr) {if (value==1) return arr });
+        //alert(test2);
+
+        //option1.title.text = "R-Chart";
+        //option1.legend.show = false;
+        //myChart1r.setOption(option1);
+
+
+        //第二页
+        //option1.legend.formatter = "BAY:DDD          Workcell:EEE           Model:FFF";
+
+
+        //$('#dd2').hide();
+    </script>
+</body>
+</html>

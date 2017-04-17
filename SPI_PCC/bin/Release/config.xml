@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<FileHandler name ="WUX SPI Data Collector">
+  <Source>
+    <Folder line="Bay2-1" IP="10.136.180.195" src_folder ="\\10.136.180.195\AutoExport\" backup_folder="\\10.136.180.195\AutoExport\bak\" error_folder="\\10.136.180.195\AutoExport\error\" log_folder ="\\10.136.180.195\AutoExport\log\" filemask="*.csv"/>
+    <Folder line="Bay3-2" IP="10.136.180.167" src_folder ="\\10.136.180.167\AutoExport\" backup_folder="\\10.136.180.167\AutoExport\bak\" error_folder="\\10.136.180.167\AutoExport\error\" log_folder ="\\10.136.180.167\AutoExport\log\" filemask="*.csv"/>
+    <Folder line="Bay5-1" IP="10.136.253.102" src_folder ="\\10.136.253.102\AutoExport\" backup_folder="\\10.136.253.102\AutoExport\bak\" error_folder="\\10.136.253.102\AutoExport\error\" log_folder ="\\10.136.253.102\AutoExport\log\" filemask="*.csv"/>
+    <Folder line="Bay6-1" IP="10.136.180.158" src_folder ="\\10.136.180.158\AutoExport\" backup_folder="\\10.136.180.158\AutoExport\bak\" error_folder="\\10.136.180.158\AutoExport\error\" log_folde ="\\10.136.180.158\AutoExport\log\" filemask="*.csv"/>
+    <Folder line="Bay6-2" IP="10.136.180.187" src_folder ="\\10.136.180.187\AutoExport\" backup_folder="\\10.136.180.187\AutoExport\bak\" error_folder="\\10.136.180.187\AutoExport\error" log_folde ="\\10.136.180.187\AutoExport\log\" filemask="*.csv"/>
+    <Folder line="Bay6A" IP="10.136.180.166" src_folder ="\\10.136.180.166\AutoExport\" backup_folder="\\10.136.180.166\AutoExport\bak\" error_folder="\\10.136.180.166\AutoExport\error\" log_folde ="\\10.136.180.166\AutoExport\log\" filemask="*.csv"/>
+    <Folder line="Bay8a-2" IP="10.136.180.190" src_folder ="\\10.136.180.190\AutoExport\" backup_folder="\\10.136.180.190\AutoExport\bak\" error_folder="\\10.136.180.190\AutoExport\error\" log_folde ="\\10.136.180.190\AutoExport\log\" filemask="*.csv"/>
+    <Folder line="Bay9-2" IP="10.136.92.241" src_folder ="\\10.136.92.241\AutoExport\" backup_folder="\\10.136.92.241\AutoExport\bak\" error_folder="\\10.136.92.241\AutoExport\error\" log_folde ="\\10.136.92.241\AutoExport\log\" filemask="*.csv"/>
+  </Source>
+</FileHandler>

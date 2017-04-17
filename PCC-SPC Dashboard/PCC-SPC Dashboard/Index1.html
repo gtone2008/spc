@@ -1,0 +1,229 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>PCC – SPC Dashboard</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="Scripts/echarts.common.min.js"></script>
+    <script src="Scripts/jquery-1.9.1.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row form-inline">
+            <label class="col-lg-2 col-lg-offset-5 text-center">SPC</label>
+            <h6 class="col-lg-5 text-right bottom bottom-right">Measurement: Solder Paste Height</h6>
+        </div>
+        <div class="row ">
+            <div id="bay1x" class="col-lg-6" style="height:100px; border-right:1px solid white"></div>
+            <div id="bay2x" class="col-lg-6" style="height:100px;"></div>
+        </div>
+        <div class="row">
+            <div id="bay1r" class="col-lg-6" style="height:100px; border-right:1px solid white"></div>
+            <div id="bay2r" class="col-lg-6" style="height:100px;"></div>
+        </div>
+
+        <br />
+        <div class="row">
+            <div id="bay3x" class="col-lg-6" style="height:100px; border-right:1px solid white"></div>
+            <div id="bay4x" class="col-lg-6" style="height:100px;"></div>
+        </div>
+        <div class="row">
+            <div id="bay3r" class="col-lg-6" style="height:100px; border-right:1px solid white"></div>
+            <div id="bay4r" class="col-lg-6" style="height:100px;"></div>
+        </div>
+
+        <br />
+        <div class="row">
+            <div id="bay5x" class="col-lg-6" style="height:100px; border-right:1px solid white"></div>
+            <div id="bay6x" class="col-lg-6" style="height:100px;"></div>
+        </div>
+        <div class="row">
+            <div id="bay5r" class="col-lg-6" style="height:100px; border-right:1px solid white"></div>
+            <div id="bay6r" class="col-lg-6" style="height:100px;"></div>
+        </div>
+    </div>
+
+    <script>
+        $(".col-lg-6").css('height', (document.body.scrollHeight - 80) / 6);
+        var myChart1 = echarts.init(document.getElementById('bay1x'));
+        var myChart2 = echarts.init(document.getElementById('bay2x'));
+        var myChart3 = echarts.init(document.getElementById('bay1r'));
+        var myChart4 = echarts.init(document.getElementById('bay2r'));
+        var myChart5 = echarts.init(document.getElementById('bay3x'));
+        var myChart6 = echarts.init(document.getElementById('bay4x'));
+        var myChart7 = echarts.init(document.getElementById('bay3r'));
+        var myChart8 = echarts.init(document.getElementById('bay4r'));
+        var myChart9 = echarts.init(document.getElementById('bay5x'));
+        var myChart10 = echarts.init(document.getElementById('bay6x'));
+        var myChart11= echarts.init(document.getElementById('bay5r'));
+        var myChart12 = echarts.init(document.getElementById('bay6r'));
+
+
+        option1 = {
+            tooltip: {},
+            backgroundColor: '#f2f2f2',
+            title: { show: true, text: 'X-Chart', textStyle: { fontWeight: 'lighter', fontSize: '5' }, },
+            grid: { x: 30, y: 20, x2: 50, y2: 10, },
+            legend: {show:true,data: ['SPC'], formatter: ''},
+            xAxis: {
+                data: [],
+                boundaryGap: false,
+            },
+            yAxis: {
+                type: 'value',
+                splitLine: { show: false },//去除网格线
+                min: '',
+                max: '',
+            },
+            series: [
+                {
+                    name: 'SPC',
+                    type: 'line',
+                    symbol: 'circle',
+                    symbolSize: 8,
+                    showAllSymbol: true,
+                    itemStyle: { normal: { color: '#00b050' } },
+                    lineStyle: { normal: { color:'silver', width: 1, } },
+                    data: [],
+                    markLine: {
+                        symbol: false,
+                        label: { normal: { position: 'end', formatter: '{b}: {c}' } },
+                        data: [],
+                    },
+                },
+
+            ]
+        };
+        var USL = 6.8;
+        var LSL = 5.1;
+        var rule = { };
+        var MarkLineItem1
+        function markLine() {
+            MarkLineItem1 = [
+                {
+                    type: 'average', name: 'CL',
+                    lineStyle: {
+                        normal: {
+                            type: 'solid',
+                            color: 'green',
+                        }
+                    }
+                },
+                {
+                    name: 'LSL',
+                    yAxis: LSL,
+                    lineStyle: {
+                        normal: {
+                            type: 'solid',
+                            color: 'red'
+                        }
+                    }
+                }, {
+                    name: 'USL',
+                    yAxis: USL,
+                    lineStyle: {
+                        normal: {
+                            type: 'solid',
+                            color: 'red'
+                        }
+                    }
+                }];
+            return MarkLineItem1;
+        }
+
+
+       
+        MarkLineItem1 = markLine();
+        option1.yAxis.min = (0.99 * LSL).toFixed(1).toString();
+        option1.yAxis.max = (1.01 * USL).toFixed(1).toString();
+        option1.legend.formatter = "BAY:AAAA          Workcell:BBBB           Model:CCCC";
+        option1.series[0].markLine.data = MarkLineItem1;
+        var data1 = [5.898, 6.111, 5.9052, 6.3306, 5.8798, 5.8568, 5.9052, 6.3306, 5.9052, 6.3306, 5.8798, 5.8568, 5.9052, 6.3306, 5.8798, 5.8568, 5.9052, 6.3306, 5.8798, 5.8568, 5.9052, 6.3306, 5.8798, 5.8568, 5.8798, 5.8568, 5.9052, 6.3306, 5.8798, 5.8568, 5.9052, 6.3306, 5.8798, 5.8568, 5.9052, 6.3306, 5.8798, 5.8568, 5.5, 6.23, 6.3306, 5.8798, 5.8568, 6.3306, 5.8798, 5.8568, 6.314, 6.292, 5.879, 5.9052, 6.3306];
+        var test1 = [0, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 0];
+        //label: { normal: { show: true } }
+        for (var i = 0; i < test1.length; i++) {
+            if (test1[i] == 1) {
+                rule = { value: data1[i], itemStyle: { normal: { color: '#ff0000' } }, };
+                data1.splice(i, 1, rule);
+            }
+        };
+        for (var i = 0; i < data1.length; i++) {
+            
+            option1.series[0].data.push(data1[i]);
+        }
+        myChart1.setOption(option1);
+        //var test2 = test1.find((n)=>n=='1');
+        //var test2 = test1.find(function (value,index,arr) {if (value==1) return arr });
+        //alert(test2);
+       
+
+
+
+        USL = 6.6;
+        LSL = 5.1;
+        MarkLineItem1 = markLine();
+        option1.yAxis.min = (0.99 * LSL).toFixed(1).toString();
+        option1.yAxis.max = (1.01 * USL).toFixed(1).toString();
+        var data1 = [6.414, 5.866, 5.9052, 6.3306, 6.414, 5.866, 5.9052, 6.3306];
+        option1.series[0].markLine.data = MarkLineItem1;
+        //for (var i = 0; i < MarkLineItem1.length; i++) {
+        //    //option1.series[0].markLine.data.pop(i);
+        //    option1.series[0].markLine.data.push(MarkLineItem1[i]);
+        //}
+        option1.series[0].data = [];
+        for (var i = 0; i < data1.length; i++) {
+            option1.series[0].data.push(data1[i]);
+        }
+        myChart2.setOption(option1);
+
+
+
+        option1.title.text = "R-Chart";
+        option1.legend.show = false;
+        myChart3.setOption(option1);
+
+
+        option1.title.text = "R-Chart";
+        option1.legend.show = false;
+        myChart4.setOption(option1);
+
+        option1.title.text = "X-Chart";
+        option1.legend.show = true;
+        myChart5.setOption(option1);
+
+
+        option1.title.text = "X-Chart";
+        option1.legend.show = true;
+        myChart6.setOption(option1);
+
+        option1.title.text = "R-Chart";
+        option1.legend.show = false;
+        myChart7.setOption(option1);
+
+        option1.title.text = "R-Chart";
+        option1.legend.show = false;
+        myChart8.setOption(option1);
+
+        option1.title.text = "X-Chart";
+        option1.legend.show = true;
+        myChart9.setOption(option1);
+
+
+        option1.title.text = "X-Chart";
+        option1.legend.show = true;
+        myChart10.setOption(option1);
+
+        option1.title.text = "R-Chart";
+        option1.legend.show = false;
+        myChart11.setOption(option1);
+
+        option1.title.text = "R-Chart";
+        option1.legend.show = false;
+        myChart12.setOption(option1);
+
+    </script>
+</body>
+</html>

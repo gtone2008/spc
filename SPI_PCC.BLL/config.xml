@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<FileHandler name ="WUX SPI Data Collector">
+  <Source>
+    <Folder line="Bay3-1" IP="10.136.180.173" src_folder ="\\wuxfile10\it\040_TEMP\SPI" backup_folder="\\wuxfile10\it\040_TEMP\SPI\BK" error_folder="\\wuxfile10\it\040_TEMP\ERR" log_folde ="\\wuxfile10\it\040_TEMP\SPI\LOG" filemask="*.csv"/>
+  </Source>
+</FileHandler>

@@ -1,0 +1,1 @@
+D:\spc\trunk\SourceCode\SPI_PCC\SPI_PCC\bin\Debug\SPI_PCC.Console.exe.config
